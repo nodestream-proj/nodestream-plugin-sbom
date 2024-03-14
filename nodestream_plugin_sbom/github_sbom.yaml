@@ -1,0 +1,105 @@
+- implementation: github_sbom:GithubSBOMExtractor
+  arguments:
+    repos: !config 'repos'
+    bearer_token: !config 'bearer_token'
+
+- implementation: nodestream.interpreting:Interpreter
+  arguments:
+    interpretations:
+    - - type: source_node
+        node_type: Document
+        key:
+          id: !jmespath __document_id
+        properties: !jmespath attributes
+      - type: relationship
+        node_type: Component
+        relationship_type: DESCRIBES
+        node_key:
+          id: !jmespath describes[*].__toId
+        find_many: true
+      - type: relationship
+        node_type: Component
+        relationship_type: DEPENDS_ON
+        node_key:
+          id: !jmespath depends_on[*].__toId
+        find_many: true
+      - type: relationship
+        node_type: Component
+        relationship_type: DEPENDENCY_OF
+        node_key:
+          id: !jmespath dependency_of[*].__toId
+        find_many: true
+      - type: relationship
+        node_type: Component
+        relationship_type: DESCRIBED_BY
+        node_key:
+          id: !jmespath described_by[*].__toId
+        find_many: true
+      - type: relationship
+        node_type: Component
+        relationship_type: CONTAINS
+        node_key:
+          id: !jmespath contains[*].__toId
+        find_many: true
+      - type: relationship
+        node_type: Component
+        relationship_type: DESCRIBES
+        node_key:
+          id: !jmespath documentDescribes[*]
+        find_many: true
+
+    - - type: source_node
+        node_type: Component
+        key:
+          id: !jmespath __component_id
+        properties: !jmespath attributes
+      - type: relationship
+        node_type: Reference
+        relationship_type: REFERS_TO
+        node_key:
+          id: !jmespath references[*].__toId
+        find_many: true
+      - type: relationship
+        node_type: Component
+        relationship_type: DEPENDS_ON
+        node_key:
+          id: !jmespath dependsOn[*].__toId
+        find_many: true
+
+    - - type: source_node
+        node_type: Reference
+        key:
+          id: !jmespath __reference_id
+        properties: !jmespath attributes
+
+    - - type: source_node
+        node_type: Vulnerability
+        key:
+          id: !jmespath __vulnerability_id
+      - type: relationship
+        node_type: Component
+        relationship_type: AFFECTS
+        node_key:
+          id: !jmespath affects[*].__toId
+        find_many: true
+
+    - - type: source_node
+        node_type: License
+        key:
+          id: !jmespath __license_id
+        properties: !jmespath attributes
+      - type: relationship
+        node_type: Component
+        relationship_type: LICENSED_BY
+        node_key:
+          id: !jmespath licensed_by[*].__toId
+        find_many: true
+        outbound: false
+      - type: relationship
+        node_type: Component
+        relationship_type: LICENSED_BY
+        node_key:
+          id: !jmespath licensed_by[*].__toId
+        find_many: true
+        outbound: false
+
