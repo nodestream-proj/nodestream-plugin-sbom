@@ -4,7 +4,8 @@ from typing import Any, AsyncGenerator, Iterable
 from pathlib import Path
 from glob import glob
 import json
-from sbom_writer import CycloneDXWriter, SPDXWriter
+from nodestream_plugin_sbom.utils.spdx_writer import SPDXWriter
+from nodestream_plugin_sbom.utils.cyclonedx_writer import CycloneDXWriter
 import flatdict
 
 

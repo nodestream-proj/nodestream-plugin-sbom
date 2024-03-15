@@ -8,10 +8,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-nodestream = "^0.11.11"
+nodestream = "^0.12.0"
 boto3 = "^1.34.62"
+flatdict =  ">=4.0.1"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins."nodestream.plugins"]
+projects = "nodestream_plugin_sbom.plugin"
