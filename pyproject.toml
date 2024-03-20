@@ -8,8 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-nodestream = "^0.12.0"
-boto3 = "^1.34.62"
+nodestream = "^0.12.0a3"
+boto3 = "^1.34.40"
 flatdict =  ">=4.0.1"
 
 

@@ -11,6 +11,10 @@ import flatdict
 
 class SBOMExtractor(Extractor):
     def __init__(self, paths: Iterable[Path]) -> None:
+        if paths is None:
+            raise AttributeError(
+                "When using the SBOMExtractor 'paths' is required and cannot be empty"
+            )
         p = Path(paths)
         if p.is_dir():
             self.paths = sorted(Path(paths).rglob("*.json"))

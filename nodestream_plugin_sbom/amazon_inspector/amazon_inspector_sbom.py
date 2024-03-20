@@ -22,8 +22,22 @@ class AmazonInspectorSBOMExtractor(Extractor):
             keyPrefix (str): The S3 bucket key for export
             kmsKeyArn (str): The KMS key used to encrypt the export
         """
+        if bucketName is None:
+            raise AttributeError(
+                "When using the AmazonInspectorSBOMExtractor 'bucketName' is required and cannot be empty"
+            )
         self.bucketName = bucketName
+
+        if keyPrefix is None:
+            raise AttributeError(
+                "When using the AmazonInspectorSBOMExtractor 'keyPrefix' is required and cannot be empty"
+            )
         self.keyPrefix = keyPrefix
+
+        if kmsKeyArn is None:
+            raise AttributeError(
+                "When using the AmazonInspectorSBOMExtractor 'kmsKeyArn' is required and cannot be empty"
+            )
         self.kmsKeyArn = kmsKeyArn
         self.logger = logging.getLogger(self.__class__.__name__)
         report_id = self.start_sbom_export()

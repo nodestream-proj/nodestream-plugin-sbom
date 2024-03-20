@@ -1,4 +1,4 @@
-- implementation: amazon_inspector_sbom:AmazonInspectorSBOMExtractor
+- implementation: nodestream_plugin_sbom.amazon_inspector_sbom:AmazonInspectorSBOMExtractor
   arguments:
     bucketName: !config 'bucketName'
     keyPrefix: !config 'keyPrefix'

@@ -10,6 +10,10 @@ class GithubSBOMExtractor(Extractor):
     bearer_token: str = None
 
     def __init__(self, repos: list[str], bearer_token: str = None) -> None:
+        if repos is None:
+            raise AttributeError(
+                "When using the GithubSBOMExtractor 'repos' is required and cannot be empty"
+            )
         self.repos = repos
         if bearer_token is not None:
             self.bearer_token = bearer_token

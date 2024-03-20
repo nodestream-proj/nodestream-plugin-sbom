@@ -1,4 +1,4 @@
-- implementation: sbom:SBOMExtractor
+- implementation: nodestream_plugin_sbom.sbom:SBOMExtractor
   arguments:
     paths: !config 'paths'
 
