@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nodestream-plugin-sbom"
-version = "0.1.1"
+version = "0.1.2"
 description = "A plugin for nodestream that allows for importing Software Bill of Materials"
 authors = ["Dave Bechberger <dbechbe@amazon.com>"]
 license = "Apache 2.0"
