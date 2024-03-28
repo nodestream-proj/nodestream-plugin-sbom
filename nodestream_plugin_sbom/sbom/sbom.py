@@ -1,8 +1,7 @@
 import logging
 from nodestream.pipeline import Extractor
-from typing import Any, AsyncGenerator, Iterable
+from typing import Iterable
 from pathlib import Path
-from glob import glob
 import json
 from nodestream_plugin_sbom.utils.spdx_writer import SPDXWriter
 from nodestream_plugin_sbom.utils.cyclonedx_writer import CycloneDXWriter
@@ -64,4 +63,3 @@ class SBOMExtractor(Extractor):
                         print(e)
             except Exception as e:
                 self.logger.error(e)
-                pass

@@ -1,4 +1,4 @@
-- implementation: nodestream_plugin_sbom.github_sbom:GithubSBOMExtractor
+- implementation: nodestream_plugin_sbom.github:GithubSBOMExtractor
   arguments:
     repos: !config 'repos'
     bearer_token: !config 'bearer_token'

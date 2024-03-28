@@ -9,6 +9,7 @@ from botocore.client import Config
 from pathlib import Path
 import json
 import shutil
+import flatdict
 
 
 class AmazonInspectorSBOMExtractor(Extractor):
@@ -124,6 +125,20 @@ class AmazonInspectorSBOMExtractor(Extractor):
                 os.makedirs(os.path.dirname(dest_pathname))
             s3_client.download_file(self.bucketName, k, dest_pathname)
 
+    def __clean_dict(self, data: dict) -> dict:
+        d = data
+        try:
+            for key in list(data):
+                if isinstance(d[key], list) and len(d[key]) == 0:
+                    d.pop(key)
+                else:
+                    if key.startswith("__"):
+                        d.pop(key)
+            return dict(flatdict.FlatterDict(d, delimiter=".").items())
+        except Exception as e:
+            self.logger.error(e)
+            return d
+
     async def extract_records(self) -> Any:
         """This performs the extraction of the records from the local SBOM copy
 
@@ -138,5 +153,14 @@ class AmazonInspectorSBOMExtractor(Extractor):
                 record = json.loads(str)
                 writer = CycloneDXWriter(record)
                 elements = writer.write_document()
+            try:
                 for e in elements:
-                    yield e
+                    if e is not None:
+                        self.logger.debug(e)
+                        if "attributes" in e:
+                            e["attributes"] = self.__clean_dict(e["attributes"])
+                        yield e
+                    else:
+                        print(e)
+            except Exception as e:
+                self.logger.error(e)
