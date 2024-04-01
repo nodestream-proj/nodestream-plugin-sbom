@@ -211,7 +211,7 @@ class CycloneDXWriter(SBOMWriter):
                 "__vulnerability_id": f"{self.NodeLabels.VULNERABILITY.value}_{v['id']}",
             }
             if "ratings" in v and len(v["ratings"]) > 0:
-                vul.append(v["ratings"][0])
+                vul["attributes"]["ratings"] = v["ratings"][0]
 
             if "affects" in v:
                 vul["affects"] = []
