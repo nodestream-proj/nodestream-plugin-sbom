@@ -74,7 +74,8 @@
     - - type: source_node
         node_type: Vulnerability
         key:
-          id: !jmespath __vulnerability_id
+          id: !jmespath __vulnerability_id      
+        properties: !jmespath attributes
       - type: relationship
         node_type: Component
         relationship_type: AFFECTS
