@@ -4,7 +4,7 @@ This repo contains a Nodestream plugin to import SBOM files in JSON formatted [C
 
 ## Features
 
-- An opinionanted graph data model for SBOM data analysis
+- An opinionated graph data model for SBOM data analysis
 - Support for JSON formatted [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) data files
 - Automated download of SBOM files from Github and import them into a graph
 - Automated export of SBOM files from [Amazon Inspector](https://aws.amazon.com/inspector/) and import them into a graph
